@@ -14,7 +14,7 @@ Can daily price movement (up and down) be predicted using standard technical ind
 ### Phase 2: (Current Remake~)
 
 **Improvements:** 
-* **Improved Code:**I rebuilt the pipeline in Python ('scikit-learn', 'pandas') only using classification metrics: Confusion Matrices, Accuracy, Precision, Recall, and ROC AUC.
+* **Improved Code:** I rebuilt the pipeline in Python ('scikit-learn', 'pandas') only using classification metrics: Confusion Matrices, Accuracy, Precision, Recall, and ROC AUC.
 * **Evaluation:** Logistic Regression and Random Forest Classifiers.
 * **Not so New Findings:** Both models converged around **~50% accuracy** and an **AUC score of~0.50-0.52**. This is still supporting short term market efficiency. In short: basic retail technical indicators alone do not beat random guessing.
 
