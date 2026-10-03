@@ -15,7 +15,7 @@ features = ["Return", "SMA_5", "SMA_10", "RSI"]
 X = df[features]
 y = df["Target"]
 
-# 2. Time-Series Split (70-30)
+# 2. Time Series Split (70-30)
 split_index = int(len(df) * 0.7)
 X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
 y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]
