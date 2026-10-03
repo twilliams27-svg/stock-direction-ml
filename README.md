@@ -16,7 +16,7 @@ Can daily price movement (up/down) be predicted using standard technical indicat
 **Improvements:** 
 * **Improved Code:** Rebuilt the pipeline in Python ('scikit-learn', 'pandas') strictly using classification metrics: Confusion Matrices, Accuracy, Precision, Recall, and ROC-AUC.
 * **Evaluation:** Logistic Regression and Random Forest Classifiers.
-* **Key Findings:** Both models converged around **~50% accuracy** and an **AUC score o f~0.50-0.52**. This provides evidence supporting short term markey efficiency-proving that basic retail technical indicators alone do not beat random guessing!
+* **Key Findings:** Both models converged around **~50% accuracy** and an **AUC score of~0.50-0.52**. This provides evidence supporting short term markey efficiency-proving that basic retail technical indicators alone do not beat random guessing!
 
 ## Interactive Web Application ##
 Built and deployed an interactive dashboard via **Streamlit Community Cloud** allowing users to: 
