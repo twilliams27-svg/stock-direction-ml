@@ -24,7 +24,7 @@ Built and deployed an interactive dashboard via **Streamlit Community Cloud** al
 * Retrain Random Forest tree depths in real time.
 * Compare live ROC curves and confusion matrices side by side. 
 ## Technologies Used
-**Python 3**
-**Pandas & NumPy:** Data manipulation and feature extraction
-**Scikit-Learn:** Machine learning models and classification evaluation
-**Matplotlib & Seaborn:** Error analysis and visual performance metrics
+* **Python 3**
+* **Pandas & NumPy:** Data manipulation and feature extraction
+* **Scikit-Learn:** Machine learning models and classification evaluation
+* **Matplotlib & Seaborn:** Error analysis and visual performance metrics
