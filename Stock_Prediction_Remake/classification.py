@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score, roc_curve
 
-#Loading data
+#data
 df = pd.read_csv("feature_data.csv", index_col=0, parse_dates=True)
 df = df.dropna()
 
@@ -15,7 +15,7 @@ features = ["Return", "SMA_5", "SMA_10", "RSI"]
 X = df[features]
 y = df["Target"]
 
-#Time Series Split (70-30)
+#Time Series
 split_index = int(len(df) * 0.7)
 X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
 y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]
@@ -25,8 +25,7 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-#Training the models
-#Using scaled data for Logistic Regression
+#Training the models. using scaled data for Logistic Regression
 log_model = LogisticRegression(max_iter=1000)
 log_model.fit(X_train_scaled, y_train)
 
