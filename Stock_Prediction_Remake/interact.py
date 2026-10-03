@@ -8,7 +8,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
 
-# Page setup
+#Page setup
 st.set_page_config(page_title="Stock Movement ML Predictor", layout="wide")
 
 st.title("Stock Movement Machine Learning Predictor")
@@ -17,16 +17,16 @@ st.write(
     "can or cannot reliably predict short term stock price direction"
 )
 
-# Sidebar interactive controls
+#Sidebar controls
 st.sidebar.header("Interactive Parameters")
 split_ratio = st.sidebar.slider("Training Data Split Ratio", min_value=0.50, max_value=0.85, value=0.70, step=0.05)
 rf_trees = st.sidebar.slider("Random Forest Trees (n_estimators)", min_value=50, max_value=300, value=200, step=50)
 
-# Resolve dataset path relative to interact.py
+#dataset path relative to interact.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "feature_data.csv")
 
-# Load data helper function
+#Load data helper function
 @st.cache_data
 def load_data():
     df = pd.read_csv(DATA_PATH, index_col=0, parse_dates=True)
@@ -39,31 +39,31 @@ try:
     X = df[features]
     y = df["Target"]
 
-    # Time Series Split controlled by slider
+    #Time Series Split controlled by a slider
     split_index = int(len(df) * split_ratio)
     X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
     y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]
 
-    # Feature Scaling
+    #Feature scaling
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
-    # Train Models
+    #Training Models
     log_model = LogisticRegression(max_iter=1000)
     log_model.fit(X_train_scaled, y_train)
 
     rf_model = RandomForestClassifier(n_estimators=rf_trees, max_depth=5, random_state=42)
     rf_model.fit(X_train, y_train)
 
-    # Predictions
+    #predictions
     log_pred = log_model.predict(X_test_scaled)
     log_prob = log_model.predict_proba(X_test_scaled)[:, 1]
 
     rf_pred = rf_model.predict(X_test)
     rf_prob = rf_model.predict_proba(X_test)[:, 1]
 
-    # Top level KPI metrics display
+    #KPI metrics display
     col1, col2 = st.columns(2)
 
     with col1:
@@ -78,7 +78,7 @@ try:
 
     st.markdown("---")
 
-    # Interactive Visual Tabs
+    #Visual tabs
     tab1, tab2 = st.tabs(["Confusion Matrices", "ROC Curve Analysis"])
 
     with tab1:
@@ -111,7 +111,7 @@ try:
 
     st.info(
         "**For Readers:**\n\n"
-        "Despite using two different machine learning architectures, both models have around **~50% accuracy** "
+        "Even though I used two different machine learning architectures, both models have around **~50% accuracy** "
         "and an **AUC score of ~0.50**. So this supports the **Efficient Market Hypothesis (EMH)**: "
         "basic retail indicators (alone) do not have sufficient predictive signal to consistently beat random guesses."
     )
