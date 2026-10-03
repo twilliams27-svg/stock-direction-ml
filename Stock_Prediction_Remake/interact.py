@@ -14,7 +14,7 @@ st.set_page_config(page_title="Stock Movement ML Predictor", layout="wide")
 st.title("Stock Movement Machine Learning Predictor")
 st.write(
     "This tool evaluates whether technical indicators (RSI, Moving Averages, Returns) "
-    "can reliably predict short term stock price direction, or if price movements behave like a random walk."
+    "can or cannot reliably predict short term stock price direction"
 )
 
 # Sidebar interactive controls
@@ -110,10 +110,10 @@ try:
         st.pyplot(fig2)
 
     st.info(
-        "**Key Insights for Admissions & Non-Technical Readers:**\n\n"
+        "**For Readers:**\n\n"
         "Despite using two different machine learning architectures, both models have around **~50% accuracy** "
-        "and an **AUC score of ~0.50**. This supports the **Efficient Market Hypothesis (EMH)**: "
-        "basic retail technical indicators alone do not have sufficient predictive signal to consistently beat random guessing."
+        "and an **AUC score of ~0.50**. So this supports the **Efficient Market Hypothesis (EMH)**: "
+        "basic retail indicators (alone) do not have sufficient predictive signal to consistently beat random guesses."
     )
 
 except FileNotFoundError:
