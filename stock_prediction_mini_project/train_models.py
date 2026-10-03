@@ -12,28 +12,25 @@ df = df.dropna()
 X = df[["Return", "SMA_5", "SMA_10", "RSI"]]
 y = df["Target"]
 
-# Time-series split
+#split
 split_index = int(len(df) * 0.7)
 X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
 Y_train, Y_test = y.iloc[:split_index], y.iloc[split_index:]
 
-# Logistic Regression
+#LR
 log_model = LogisticRegression(max_iter=1000)
 log_model.fit(X_train, Y_train)
 log_pred = log_model.predict(X_test)
 log_acc = accuracy_score(Y_test, log_pred)
 
-#random Forest Classifier
+#rf Classifier
 rf_model = RandomForestClassifier(n_estimators=200, max_depth=5)
 rf_model.fit(X_train, Y_train)
 rf_pred = rf_model.predict(X_test)
 rf_acc = accuracy_score(Y_test, rf_pred)
 
-
 print("Logistic Regression Accuracy:", log_acc)
 print("Random Forest Accuracy:", rf_acc)
-
-# Save the models
-
+#Saving the models
 pickle.dump(log_model, open("logistic_model.pkl", "wb"))
 pickle.dump(rf_model, open("random_forest_model.pkl", "wb"))
