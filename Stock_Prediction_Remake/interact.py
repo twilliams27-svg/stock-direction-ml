@@ -26,7 +26,7 @@ rf_trees = st.sidebar.slider("Random Forest Trees (n_estimators)", min_value=50,
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "feature_data.csv")
 
-#Load data helper function
+#data helper function
 @st.cache_data
 def load_data():
     df = pd.read_csv(DATA_PATH, index_col=0, parse_dates=True)
@@ -44,7 +44,7 @@ try:
     X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
     y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]
 
-    #Feature scaling
+    #More feature scaling
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
