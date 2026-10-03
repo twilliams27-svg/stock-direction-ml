@@ -12,13 +12,12 @@ y = df["Target"]
 features = ["Return", "SMA_5", "SMA_10", "RSI"]
 X = df[features]
 
-#train-test split (70-30)
 split_index = int(len(df) * 0.7)
 X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
 Y_train, Y_test = y.iloc[:split_index], y.iloc[split_index:]
 actual = Y_test.reset_index(drop=True)
 
-#load models
+
 with open("logistic_model.pkl", "rb") as f:
     logistic_model = pickle.load(f)
 
@@ -42,8 +41,7 @@ def evaluate_model(y_true, y_pred, model_name = "Model"):
 
 log_metrics = evaluate_model(actual, log_pred, "Logistic Regression")
 rf_metrics = evaluate_model(actual, rf_pred, "Random Forest")
-
-#automated comparison
+#comparison
 print("\n=== Model Comparison Summary ===")
 if log_metrics["MAE"] < rf_metrics["MAE"]:
     print("Logistic Regression performs better based on MAE. (lower is better)")
@@ -58,7 +56,7 @@ if log_metrics["R2"] > rf_metrics["R2"]:
 else:
     print("Random Forest performs better based on R^2 Score. (higher is better)")
 
-#compute per-sample "winner"
+#the winner
 log_error = abs(log_pred - actual)
 rf_error = abs(rf_pred - actual)
 
@@ -93,7 +91,6 @@ plt.ylabel("Target Value")
 plt.title("Actual vs Predicted Values (First 200 Samples)")
 plt.show()
 
-#add winner markers (presentation purposes)
 
 error_diff = (log_error - rf_error)[:200]
 plt.figure(figsize=(12, 4))
@@ -113,7 +110,6 @@ plt.ylabel("Error Difference (Logistic - RF)")
 plt.title("Model Performance Comparison (First 200 Samples)")
 plt.legend(["Tie Line", "Logistic Win (green)", "Random Forest Win (orange)"])
 plt.show()
-    
 
 #plot prediction errors
 plt.figures(figsize=(12, 4))
