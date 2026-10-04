@@ -9,7 +9,6 @@ def add_features():
     df["Open"] = pd.to_numeric(df["Open"], errors="coerce")
     df["Volume"] = pd.to_numeric(df["Volume"], errors="coerce")
 
-    #The features!!
     df["Return"] = df["Close"].pct_change()
     df["SMA_5"] = df["Close"].rolling(window=5).mean()
     df["SMA_10"] = df["Close"].rolling(window=10).mean()
