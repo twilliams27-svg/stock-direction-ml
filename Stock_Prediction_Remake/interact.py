@@ -8,7 +8,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
 
-#Page setup
 st.set_page_config(page_title="Stock Movement ML Predictor", layout="wide")
 
 st.title("Stock Movement Machine Learning Predictor")
@@ -17,16 +16,13 @@ st.write(
     "can or cannot reliably predict short term stock price direction"
 )
 
-#Sidebar controls
 st.sidebar.header("Interactive Parameters")
 split_ratio = st.sidebar.slider("Training Data Split Ratio", min_value=0.50, max_value=0.85, value=0.70, step=0.05)
 rf_trees = st.sidebar.slider("Random Forest Trees (n_estimators)", min_value=50, max_value=300, value=200, step=50)
 
-#dataset path relative to interact.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_PATH = os.path.join(BASE_DIR, "feature_data.csv")
 
-#data helper function
 @st.cache_data
 def load_data():
     df = pd.read_csv(DATA_PATH, index_col=0, parse_dates=True)
@@ -39,31 +35,26 @@ try:
     X = df[features]
     y = df["Target"]
 
-    #Time Series Split controlled by a slider
     split_index = int(len(df) * split_ratio)
     X_train, X_test = X.iloc[:split_index], X.iloc[split_index:]
     y_train, y_test = y.iloc[:split_index], y.iloc[split_index:]
 
-    #More feature scaling
     scaler = StandardScaler()
     X_train_scaled = scaler.fit_transform(X_train)
     X_test_scaled = scaler.transform(X_test)
 
-    #Training Models
     log_model = LogisticRegression(max_iter=1000)
     log_model.fit(X_train_scaled, y_train)
 
     rf_model = RandomForestClassifier(n_estimators=rf_trees, max_depth=5, random_state=42)
     rf_model.fit(X_train, y_train)
 
-    #predictions
     log_pred = log_model.predict(X_test_scaled)
     log_prob = log_model.predict_proba(X_test_scaled)[:, 1]
 
     rf_pred = rf_model.predict(X_test)
     rf_prob = rf_model.predict_proba(X_test)[:, 1]
 
-    #KPI metrics display
     col1, col2 = st.columns(2)
 
     with col1:
@@ -78,7 +69,6 @@ try:
 
     st.markdown("---")
 
-    #Visual tabs
     tab1, tab2 = st.tabs(["Confusion Matrices", "ROC Curve Analysis"])
 
     with tab1:
