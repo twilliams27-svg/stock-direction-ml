@@ -31,6 +31,5 @@ rf_acc = accuracy_score(Y_test, rf_pred)
 
 print("Logistic Regression Accuracy:", log_acc)
 print("Random Forest Accuracy:", rf_acc)
-#Saving the models
 pickle.dump(log_model, open("logistic_model.pkl", "wb"))
 pickle.dump(rf_model, open("random_forest_model.pkl", "wb"))
