@@ -1,17 +1,14 @@
 # stock-direction-ml
-ML project evaluating stock price direction based on technical indicators and python!
-
-## Main Question
 Can daily price movement (up and down) be predicted using standard technical indicators (RSI, Simple Moving Averages, Daily Returns)
 
-## Phase 1 (Mini_Project --- completed around 9 months ago for an Algebra 2 project)
-* **Approach:** I attempted to predict daily binary price movements using default regression setups.
-* **there was a flaw:** I applied continuous regression metrics ($R^2$) to a binary target variable, but that gave me a confusing negative $R^2$ scores and misleading performance signals.
-* **My Recent Realization:** A model predicting direction requires strict binary classification metrics, and not continuous line fitting metrics. Thankfully this is a fairly simple fix.
+**Phase 1 (Mini_Project --- completed around 9 months ago for an Algebra 2 project)**
+- I attempted to predict daily binary price movements using default regression setups.
+- there was a flaw: I applied continuous regression metrics ($R^2$) to a binary target variable, but that gave me a confusing negative $R^2$ scores and misleading performance signals.
+- My Recent Realization: A model predicting direction requires strict binary classification metrics, and not continuous line fitting metrics. Thankfully this is a fairly simple fix.
 
 **Phase 1 (baseline) Finding:** The models demonstrated ~50% directional accuracy, aligning with the Efficient Market Hypothesis for shortterm technical indicators.
 
-### Phase 2: (Current Remake)
+**Phase 2: (Current Remake)**
 
 **Improvements:** 
 - I rebuilt the pipeline in Python ('scikit-learn', 'pandas') only using classification metrics: Confusion Matrices, Accuracy, Precision, Recall, and ROC AUC.
